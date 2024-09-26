@@ -1,0 +1,41 @@
+name: Push & PR
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  push:
+    branches: [main]
+
+jobs:
+  rspec:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        activesupport: ['6.1', '7.0', '7.1', '7.2']
+        ruby: ['3.2', '3.3']
+    env:
+      ACTIVESUPPORT: '${{ matrix.activesupport }}'
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '${{ matrix.ruby }}'
+        bundler-cache: true
+        cache-version: ${{ matrix.activesupport }}
+    - name: Rspec
+      run: bundle exec rspec
+
+  rubocop:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 3.3
+        bundler-cache: true
+        cache-version: '7.2'
+    - name: Rubocop
+      run: bundle exec rubocop
