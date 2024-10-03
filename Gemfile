@@ -6,6 +6,16 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'activesupport', "~> #{ENV.fetch('ACTIVESUPPORT', '7.2')}.0"
-gem 'rake', '~> 13.0'
+
+group :development do
+  gem 'rbs', '~> 3'
+  # gem 'solargraph'
+  # gem 'typeprof'
+end
+
 gem 'rspec', '~> 3.0'
-gem 'rubocop', '~> 1.21'
+
+gem 'rubocop', '1.66.1', require: false
+gem 'rubocop-rspec', '3.1.0', require: false
+
+gem 'steep'

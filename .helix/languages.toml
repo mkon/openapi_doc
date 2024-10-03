@@ -1,0 +1,14 @@
+[language-server.solargraph]
+config.diagnostics = false
+config.formatting = false
+config.completion = false
+# config.signature-help = false
+
+[[language]]
+name = "ruby"
+auto-format = false
+language-servers = [
+  { name = "rubocop" },
+  { name = "steep" },
+  # { name = "solargraph" },
+]

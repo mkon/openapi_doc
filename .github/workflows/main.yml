@@ -27,7 +27,7 @@ jobs:
     - name: Rspec
       run: bundle exec rspec
 
-  rubocop:
+  syntax:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -37,5 +37,7 @@ jobs:
         ruby-version: 3.3
         bundler-cache: true
         cache-version: '7.2'
+    - name: Steep
+      run: bundle exec steep check
     - name: Rubocop
       run: bundle exec rubocop
